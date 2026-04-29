@@ -1,0 +1,140 @@
+/* ===== VARIABLES DE COULEURS ===== */
+:root {
+    --couleur-fond: #0f1117;
+    --couleur-carte: #1a1d27;
+    --couleur-bordure: #2e3148;
+    --couleur-accent: #6c63ff;
+    --couleur-accent-hover: #857dff;
+    --couleur-texte: #e8e8f0;
+    --couleur-texte-doux: #8888aa;
+    --couleur-erreur: #ff6b6b;
+    --couleur-succes: #63ffb0;
+}
+
+/* ===== RESET DE BASE ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--couleur-fond);
+    color: var(--couleur-texte);
+    font-family: 'Courier New', monospace;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== CARTE DU FORMULAIRE ===== */
+.carte {
+    background-color: var(--couleur-carte);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 12px;
+    padding: 40px;
+    width: 100%;
+    max-width: 480px;
+    margin: 20px;
+}
+
+h1 {
+    font-size: 1.6rem;
+    margin-bottom: 8px;
+    color: var(--couleur-accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.sous-titre {
+    color: var(--couleur-texte-doux);
+    font-size: 0.85rem;
+    margin-bottom: 30px;
+}
+
+/* ===== CHAMPS DU FORMULAIRE ===== */
+.champ {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--couleur-texte-doux);
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    background: var(--couleur-fond);
+    border: 1px solid var(--couleur-bordure);
+    border-radius: 6px;
+    padding: 12px 14px;
+    color: var(--couleur-texte);
+    font-family: 'Courier New', monospace;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--couleur-accent);
+}
+
+/* Bordure verte si valide, rouge si erreur */
+input.valide {
+    border-color: var(--couleur-succes);
+}
+
+input.invalide {
+    border-color: var(--couleur-erreur);
+}
+
+/* ===== MESSAGES D'ERREUR ===== */
+.message-erreur {
+    font-size: 0.78rem;
+    color: var(--couleur-erreur);
+    margin-top: 5px;
+    min-height: 16px; /* Réserve la place pour éviter les sauts */
+}
+
+/* ===== BOUTON ===== */
+button[type="submit"] {
+    width: 100%;
+    background-color: var(--couleur-accent);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-family: 'Courier New', monospace;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+    background-color: var(--couleur-accent-hover);
+}
+
+/* ===== LIEN ENTRE LES PAGES ===== */
+.lien-page {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.85rem;
+    color: var(--couleur-texte-doux);
+}
+
+.lien-page a {
+    color: var(--couleur-accent);
+    text-decoration: none;
+}
+
+.lien-page a:hover {
+    text-decoration: underline;
+}

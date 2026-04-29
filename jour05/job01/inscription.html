@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Inscription</title>
+        <link rel="stylesheet" href="style.css" />
+    </head>
+    
+    <body>
+
+        <div class="carte">
+            <h1>Inscription</h1>
+            <p class="sous-titre">Créez votre compte en quelques secondes</p>
+
+            <form id="formInscription" novalidate>
+
+                <!-- Nom -->
+                <div class="champ">
+                    <label for="nom">Nom</label>
+                    <input
+                        type="text"
+                        id="nom"
+                        name="nom"
+                        autocomplete="family-name"
+                        placeholder="Dupont"
+                        maxlength="50"
+                    />
+                    <p class="message-erreur" id="erreur-nom"></p>
+                </div>
+
+                <!-- Prénom -->
+                <div class="champ">
+                    <label for="prenom">Prénom</label>
+                    <input
+                        type="text"
+                        id="prenom"
+                        name="prenom"
+                        autocomplete="given-name"
+                        placeholder="Marie"
+                        maxlength="50"
+                    />
+                    <p class="message-erreur" id="erreur-prenom"></p>
+                </div>
+
+                <!-- Email -->
+                <div class="champ">
+                    <label for="email">Email</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        autocomplete="email"
+                        placeholder="nom@domaine.fr"
+                    />
+                    <p class="message-erreur" id="erreur-email"></p>
+                </div>
+
+                <!-- Mot de passe -->
+                <div class="champ">
+                    <label for="motdepasse">Mot de passe</label>
+                    <input
+                        type="password"
+                        id="motdepasse"
+                        name="motdepasse"
+                        autocomplete="new-password"
+                        placeholder="••••••••"
+                    />
+                    <p class="message-erreur" id="erreur-motdepasse"></p>
+                </div>
+
+                <!-- Adresse -->
+                <div class="champ">
+                    <label for="adresse">Adresse</label>
+                    <input
+                        type="text"
+                        id="adresse"
+                        name="adresse"
+                        autocomplete="street-address"
+                        placeholder="12 rue des Lilas"
+                        maxlength="100"
+                    />
+                    <p class="message-erreur" id="erreur-adresse"></p>
+                </div>
+
+                <!-- Code postal -->
+                <div class="champ">
+                    <label for="codepostal">Code postal</label>
+                    <input
+                        type="text"
+                        id="codepostal"
+                        name="codepostal"
+                        autocomplete="postal-code"
+                        placeholder="13001"
+                        maxlength="5"
+                    />
+                    <p class="message-erreur" id="erreur-codepostal"></p>
+                </div>
+
+                <button type="submit">Créer mon compte</button>
+            </form>
+
+            <p class="lien-page">
+                Déjà un compte ? <a href="connexion.html">Se connecter</a>
+            </p>
+        </div>
+
+        <script src="validation.js"></script>
+        <script>
+            // Validation en temps réel quand l'utilisateur quitte un champ (événement "blur")
+            document.getElementById("nom").addEventListener("blur", function () {
+                validerObligatoire(this, "erreur-nom", "Nom");
+            });
+
+            document.getElementById("prenom").addEventListener("blur", function () {
+                validerObligatoire(this, "erreur-prenom", "Prénom");
+            });
+
+            document.getElementById("email").addEventListener("blur", function () {
+                validerEmail(this, "erreur-email");
+            });
+
+            document.getElementById("motdepasse").addEventListener("blur", function () {
+                validerMotDePasse(this, "erreur-motdepasse");
+            });
+
+            document.getElementById("adresse").addEventListener("blur", function () {
+                validerObligatoire(this, "erreur-adresse", "Adresse");
+            });
+
+            document.getElementById("codepostal").addEventListener("blur", function () {
+                validerCodePostal(this, "erreur-codepostal");
+            });
+
+            // Validation complète à la soumission
+            document.getElementById("formInscription").addEventListener("submit", async function (e) {
+                e.preventDefault();
+
+                // On valide tous les champs et on attend les résultats
+                const resultats = await Promise.all([
+                    validerObligatoire(document.getElementById("nom"),        "erreur-nom",        "Nom"),
+                    validerObligatoire(document.getElementById("prenom"),     "erreur-prenom",     "Prénom"),
+                    validerEmail(      document.getElementById("email"),      "erreur-email"),
+                    validerMotDePasse( document.getElementById("motdepasse"), "erreur-motdepasse"),
+                    validerObligatoire(document.getElementById("adresse"),    "erreur-adresse",    "Adresse"),
+                    validerCodePostal( document.getElementById("codepostal"), "erreur-codepostal"),
+                ]);
+
+                // Si tous les résultats sont "true", tout est valide
+                const toutEstValide = resultats.every((r) => r === true);
+
+                if (toutEstValide) {
+                    alert("Inscription réussie !");
+                    // Ici on enverrait normalement les données au serveur
+                }
+            });
+        </script>
+
+    </body>
+</html>
